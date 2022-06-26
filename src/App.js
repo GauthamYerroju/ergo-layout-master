@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import Grid from './core/grid.js'
+import Cluster from './core/cluster'
 
 function App() {
+  const g = new Grid(2, 1)
+  console.log(g)
+
+  const c1 = new Cluster(0, 0, 4, 3)
+  g.add(c1)
+  console.log(g.width, g.height)
+  
+  const c2 = new Cluster(1, 2, 5, 4)
+  g.add(c2)
+  console.log(g.width, g.height)
+  
+  const c3 = new Cluster(0, 0, 16, 9)
+  g.add(c3)
+  console.log(g.width, g.height)
+
+  g.remove(c3)
+  console.log(g.width, g.height)
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <main className="App-main">
+      </main>
     </div>
   );
 }
