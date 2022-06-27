@@ -2,29 +2,55 @@ class Grid {
     constructor(minWidth, minHeight) {
         this.minWidth = minWidth
         this.minHeight = minHeight
-        this.objects = []
+        this.clusters = []
     }
 
     get width() {
-        // console.log(this.objects.map(o => o.x + o.width))
-        return Math.max(this.minWidth, ...this.objects.map(o => o.x + o.width))
+        return Math.max(this.minWidth, ...this.clusters.map(o => o.x + o.width))
     }
 
 
     get height() {
-        // console.log(this.objects.map(o => o.y + o.height))
-        return Math.max(this.minHeight, ...this.objects.map(o => o.y + o.height))
+        return Math.max(this.minHeight, ...this.clusters.map(o => o.y + o.height))
     }
 
-    add(obj) {
-        this.objects.push(obj)
+    add(cluster) {
+        this.clusters.push(cluster)
     }
 
-    remove(obj) {
-        const index = this.objects.indexOf(obj);
+    remove(cluster) {
+        const index = this.clusters.indexOf(cluster);
         if (index >= 0) {
-            this.objects.splice(index, 1)
+            this.clusters.splice(index, 1)
         }
+    }
+
+    get keys() {
+        const keys = []
+        for(let x = 0; x <= this.width; x++) {
+            const row = []
+            for(let y = 0; y <= this.height; y++) {
+                row.push([])
+            }
+            keys.push(row)
+        }
+        
+        this.clusters.forEach(cluster => {
+            for(let x = 0; x < cluster.width; x++) {
+                for(let y = 0; y < cluster.height; y++) {
+                    const key = cluster.keys[x][y]
+                    console.log(key === null)
+                    if (key) {
+                        keys[cluster.x + x][cluster.y + y].push(key)
+                    }
+                }
+            }
+        })
+
+        for(let x = 0; x <= this.width; x++) {
+            console.log(keys[x].join('\t'))
+        }
+        return keys
     }
 
 }
