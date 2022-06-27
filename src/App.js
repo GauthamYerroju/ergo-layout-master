@@ -1,6 +1,6 @@
 import './App.css';
 import Grid from './core/grid.js'
-import Cluster from './core/cluster'
+import { AlphaCluster, Cluster } from './core/cluster'
 
 function App() {
   const g = new Grid(2, 1)
@@ -10,7 +10,7 @@ function App() {
   g.add(c1)
   // console.log(g.width, g.height)
   
-  const c2 = new Cluster(1, 2, 5, 4, 'b')
+  const c2 = new AlphaCluster(1, 2)
   g.add(c2)
   // console.log(g.width, g.height)
   
