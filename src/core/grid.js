@@ -1,3 +1,5 @@
+import transpose from "./transpose"
+
 class Grid {
     constructor(minWidth, minHeight) {
         this.minWidth = minWidth
@@ -27,19 +29,18 @@ class Grid {
 
     get keys() {
         const keys = []
-        for(let x = 0; x <= this.width; x++) {
+        for (let x = 0; x <= this.width; x++) {
             const row = []
-            for(let y = 0; y <= this.height; y++) {
+            for (let y = 0; y <= this.height; y++) {
                 row.push([])
             }
             keys.push(row)
         }
-        
+
         this.clusters.forEach(cluster => {
-            for(let x = 0; x < cluster.width; x++) {
-                for(let y = 0; y < cluster.height; y++) {
+            for (let x = 0; x < cluster.width; x++) {
+                for (let y = 0; y < cluster.height; y++) {
                     const key = cluster.keys[x][y]
-                    console.log(key === null)
                     if (key) {
                         keys[cluster.x + x][cluster.y + y].push(key)
                     }
@@ -47,10 +48,21 @@ class Grid {
             }
         })
 
-        for(let x = 0; x <= this.width; x++) {
-            console.log(keys[x].join('\t'))
-        }
         return keys
+    }
+
+    log(g) {
+        const display = []
+        for (let x = 0; x <= this.width; x++) {
+            const col = []
+            for (let y = 0; y <= this.height; y++) {
+                let k = this.keys[x][y].join(', ')
+                if (k === null || k === '') { k = ' ' }
+                col.push(k)
+            }
+            display.push(col)
+        }
+        console.table(transpose(display))
     }
 
 }

@@ -1,4 +1,5 @@
-import Cluster from './cluster.js'
+import Cluster from './cluster'
+import transpose from '../transpose'
 
 class AlphaCluster extends Cluster {
     constructor(x, y, layout='qwerty') {
@@ -7,7 +8,7 @@ class AlphaCluster extends Cluster {
     }
 
     set layout(layout) {
-        const keys = this.transpose(AlphaCluster.keysByLayout(layout))
+        const keys = transpose(AlphaCluster.keysByLayout(layout))
         for(let i = 0; i < this.width; i++) {
             for(let j = 0; j < this.height; j++) {
                 this.keys[i][j] = keys[i][j]
@@ -18,58 +19,44 @@ class AlphaCluster extends Cluster {
     static keysByLayout(layout) {
         const layouts = {
             'qwerty': [
-                'qwertyuiop'.split(''),
-                'asdfghjkl;'.split(''),
-                'zxcvbnm,./'.split('')
+                'QWERTYUIOP'.split(''),
+                'ASDFGHJKL;'.split(''),
+                'ZXCVBNM,./'.split('')
             ]        ,
             'colemak': [
-                'qwfpgjluy;'.split(''),
-                'arstdhneio'.split(''),
-                'zxcvbkm,./'.split('')
+                'QWFPGJLUY;'.split(''),
+                'ARSTDHNEIO'.split(''),
+                'ZXCVBKM,./'.split('')
             ],
             'colemak_dh': [
-                'qwfpbjluy;'.split(''),
-                'arstgkneio'.split(''),
-                'zxcdvmh,./'.split('')
+                'QWFPBJLUY;'.split(''),
+                'ARSTGKNEIO'.split(''),
+                'ZXCDVMH,./'.split('')
             ],
             'colemak_dhm': [
-                'qwfpbjluy;'.split(''),
-                'arstgmneio'.split(''),
-                'zxcdvkh,./'.split('')
+                'QWFPBJLUY;'.split(''),
+                'ARSTGMNEIO'.split(''),
+                'ZXCDVKH,./'.split('')
             ],
             'dvorak': [
-                "',.pyfgcrl".split(''),
-                'aoeuidhtns'.split(''),
-                ';qjkxbmwvz'.split('')
+                "',.PYFGCRL".split(''),
+                'AOEUIDHTNS'.split(''),
+                ';QJKXBMWVZ'.split('')
             ],
             'workman': [
-                'qdrwbjfup;'.split(''),
-                'ashtgyneoi'.split(''),
-                'zxmcvkl,./'.split('')
+                'QDRWBJFUP;'.split(''),
+                'ASHTGYNEOI'.split(''),
+                'ZXMCVKL,./'.split('')
             ],
             'norman': [
-                'qwdfkjurl;'.split(''),
-                'asetgynioh'.split(''),
-                'zxcvbpm,./'.split('')
+                'QWDFKJURL;'.split(''),
+                'ASETGYNIOH'.split(''),
+                'ZXCVBPM,./'.split('')
             ]
         }
 
         return layouts[layout]
     }
-
-    transpose(matrix) {
-        const rows = matrix.length, cols = matrix[0].length;
-        const grid = [];
-        for (let j = 0; j < cols; j++) {
-          grid[j] = Array(rows);
-        }
-        for (let i = 0; i < rows; i++) {
-          for (let j = 0; j < cols; j++) {
-            grid[j][i] = matrix[i][j];
-          }
-        }
-        return grid;
-      }
 }
 
 export default AlphaCluster
