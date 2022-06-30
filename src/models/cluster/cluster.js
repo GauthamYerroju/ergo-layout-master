@@ -1,6 +1,6 @@
 import transpose from "../transpose"
 
-class Cluster {
+class ClusterModel {
     constructor(x, y, width, height, k) {
         this.state = {
             selected: false,
@@ -53,4 +53,4 @@ class Cluster {
     }
 }
 
-export default Cluster
+export default ClusterModel

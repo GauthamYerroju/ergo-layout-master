@@ -1,6 +1,6 @@
-import Cluster from './cluster.js'
+import ClusterModel from './cluster.js'
 
-class NumberCluster extends Cluster {
+class NumberClusterModel extends ClusterModel {
     constructor(x, y) {
         super(x, y, 10, 1)
         const keys = '1234567890'.split('').map(n => [n])
@@ -10,4 +10,4 @@ class NumberCluster extends Cluster {
     }
 }
 
-export default NumberCluster
+export default NumberClusterModel

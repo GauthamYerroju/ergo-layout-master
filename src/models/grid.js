@@ -1,11 +1,11 @@
 import transpose from './transpose'
 
-class Grid {
+class GridModel {
   constructor (minWidth, minHeight) {
     this.minWidth = minWidth
     this.minHeight = minHeight
     this.clusters = []
-    this.collisions = {}
+    this._collisions = {}
 
     this.cells = this.makeCells()
   }
@@ -32,7 +32,7 @@ class Grid {
 
   updateCellsAndCollisions () {
     this.cells = this.makeCells()
-    this.collisions = {}
+    this._collisions = {}
     this.clusters.forEach(cluster => {
       for (let x = 0; x < cluster.width; x++) {
         for (let y = 0; y < cluster.height; y++) {
@@ -41,7 +41,7 @@ class Grid {
             const cell = this.cells[cluster.x + x][cluster.y + y]
             cell.push(key)
             // Update collisions
-            const collision = this.collisions[[x, y]]
+            const collision = this._collisions[[x, y]]
             if (collision === undefined) {
               this.clusterMap[[x, y]] = [cluster]
             } else {
@@ -54,7 +54,7 @@ class Grid {
   }
 
   get collisions () {
-    return Object.entries(this.collisions)
+    return Object.entries(this._collisions)
       .map(([position, clusters]) =>
         clusters.length > 1 ? [position, clusters] : false
       )
@@ -62,7 +62,7 @@ class Grid {
   }
 
   get hasCollision () {
-    return this.collisions.length > 0
+    return this._collisions.length > 0
   }
 
   add (cluster) {
@@ -91,4 +91,4 @@ class Grid {
     console.table(transpose(display))
   }
 }
-export default Grid
+export default GridModel

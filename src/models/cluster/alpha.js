@@ -1,14 +1,14 @@
-import Cluster from './cluster'
+import ClusterModel from './cluster'
 import transpose from '../transpose'
 
-class AlphaCluster extends Cluster {
+class AlphaClusterModel extends ClusterModel {
     constructor(x, y, layout='qwerty') {
         super(x, y, 10, 3)
         this.layout = layout
     }
 
     set layout(layout) {
-        const keys = transpose(AlphaCluster.keysByLayout(layout))
+        const keys = transpose(AlphaClusterModel.keysByLayout(layout))
         for(let i = 0; i < this.width; i++) {
             for(let j = 0; j < this.height; j++) {
                 this.keys[i][j] = keys[i][j]
@@ -59,4 +59,4 @@ class AlphaCluster extends Cluster {
     }
 }
 
-export default AlphaCluster
+export default AlphaClusterModel
