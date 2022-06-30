@@ -2,19 +2,15 @@ import transpose from "../transpose"
 
 class Cluster {
     constructor(x, y, width, height, k) {
+        this.state = {
+            selected: false,
+            lifted: false,
+        }
         this.x = x
         this.y = y
         this.width = width
         this.height = height
-        const keys = []
-        for (let x = 0; x <= this.width; x++) {
-            const row = []
-            for (let y = 0; y <= this.height; y++) {
-                row.push(k)
-            }
-            keys.push(row)
-        }
-        this.keys = keys
+        this.keys = this.makeKeys(k)
     }
 
 
@@ -30,6 +26,30 @@ class Cluster {
             display.push(col)
         }
         console.table(transpose(display))
+    }
+
+    lift() {
+        this.state.lifted = true
+    }
+
+    drop() {
+        this.state.lifted = false
+    }
+
+    clear() {
+        this.keys = this.makeKeys(null)
+    }
+
+    makeKeys(k=null) {
+        const keys = []
+        for (let x = 0; x <= this.width; x++) {
+            const row = []
+            for (let y = 0; y <= this.height; y++) {
+                row.push(k)
+            }
+            keys.push(row)
+        }
+        return keys
     }
 }
 

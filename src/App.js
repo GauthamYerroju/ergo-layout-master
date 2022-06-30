@@ -4,7 +4,8 @@ import { FunctionCluster, NumberCluster, AlphaCluster } from './core/cluster'
 
 function App() {
   const g = new Grid(2, 1)
-
+  window.g = g
+  
   const c1 = new NumberCluster(1, 1)
   g.add(c1)
   
@@ -13,8 +14,6 @@ function App() {
   
   const c3 = new FunctionCluster(0, 0)
   g.add(c3)
-
-  g.log()
   
   return (
     <div className="App">
