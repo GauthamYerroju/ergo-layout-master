@@ -67,12 +67,14 @@ class GridModel {
 
   add (cluster) {
     this.clusters.push(cluster)
+    this.updateCellsAndCollisions()
   }
 
   remove (cluster) {
     const index = this.clusters.indexOf(cluster)
     // assert(index >= 0, "Trying to remove a non-existent cluster.")
     this.clusters.splice(index, 1)
+    this.updateCellsAndCollisions()
   }
 
   log (g) {
