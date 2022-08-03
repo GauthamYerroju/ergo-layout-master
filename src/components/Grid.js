@@ -15,6 +15,7 @@ import {
     // MenuDivider,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { addCluster } from '../store';
 
 function Grid(props) {
     return (
@@ -34,14 +35,12 @@ function Grid(props) {
                     </MenuButton>
                     <MenuList>
                         {Object.keys(ClusterTypes).map(name =>
-                            <MenuItem key={name} onClick={() => console.log(`Created {name} cluster`)}>{name}</MenuItem>
+                            <MenuItem key={name} onClick={() => addCluster(name)}>{name}</MenuItem>
                         )}
                     </MenuList>
                 </Menu>
                 <Box>
-                    {grid.clusters.map((cluster, i) => {
-                        return <Cluster key={i} model={cluster}></Cluster>
-                    })}
+                    {props.model.clusters.map((cluster, i) => <Cluster key={i} model={cluster}></Cluster>)}
                 </Box>
             </Box>
         </Flex>

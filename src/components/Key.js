@@ -10,7 +10,7 @@ export default function Key(props) {
             w='48px'
             h='48px'
         >
-            <label>{props.model.label}</label>
+            <label>{props.model}</label>
         </Box>
     );
 }

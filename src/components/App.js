@@ -1,14 +1,13 @@
 import './App.css';
-import React, { useState } from 'react';
-import GridModel from '../models/grid';
+import React from 'react';
+import useStore from '../store'
 
 import Grid from './Grid';
-import Settings from './Settings';
 import { Flex } from '@chakra-ui/react';
 
 export default function App(props) {
-  const [gridSize, setGridSize] = useState(48)
-  const [grid, setGrid] = useState(new GridModel(10, 3))
+  const gridSize = 48
+  const grid = useStore(state => state.grid)
   return (
     <Flex
         className="App"
