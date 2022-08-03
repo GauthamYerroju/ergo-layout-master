@@ -7,15 +7,15 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const renderApp = () => root.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <ChakraProvider>
+            <App />
+        </ChakraProvider>
+    </React.StrictMode>
 );
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
-  module.hot.accept('./components/App', renderApp)
+    module.hot.accept('./components/App', renderApp)
 }
 
 renderApp();
