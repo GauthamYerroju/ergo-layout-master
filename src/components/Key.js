@@ -1,16 +1,16 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Square } from '@chakra-ui/react';
 
 export default function Key(props) {
     return (
-        <Box
-            className="Key"
-            bg="gray.100"
-            border="1px"
-            w='48px'
-            h='48px'
+        <Square
+            backgroundColor="#efefef"
+            dropShadow=""
+            borderRadius={4}
+            size={16}
+            margin={1}
         >
-            <label>{props.model}</label>
-        </Box>
+            <label>{props.model.label}</label>
+        </Square>
     );
 }
