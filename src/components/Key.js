@@ -7,7 +7,7 @@ export default function Key(props) {
             backgroundColor="#efefef"
             dropShadow=""
             borderRadius={4}
-            size={16}
+            size={14}
             margin={1}
         >
             <label>{props.model.label}</label>
