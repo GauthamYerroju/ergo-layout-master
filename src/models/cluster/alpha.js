@@ -1,28 +1,31 @@
 import ClusterModel from './cluster'
 import transpose from '../transpose'
+import ColumnModel from '../column'
+import KeyModel from '../key'
 
 class AlphaClusterModel extends ClusterModel {
-    constructor(x, y, layout='qwerty') {
-        super(x, y, 10, 3)
+    constructor(x, y, layout = 'qwerty') {
+        super(x, y)
         this.layout = layout
     }
 
     set layout(layout) {
-        const keys = transpose(AlphaClusterModel.keysByLayout(layout))
-        for(let i = 0; i < this.width; i++) {
-            for(let j = 0; j < this.height; j++) {
-                this.keys[i][j] = keys[i][j]
-            }
-        }
+        const columns = transpose(AlphaClusterModel.columnsByLayout(layout))
+        columns.forEach(col => {
+            const keys = col.map(keyCode => new KeyModel(keyCode))
+            const column = new ColumnModel(keys)
+            console.log(column)
+            this.add(column)
+        })
     }
 
-    static keysByLayout(layout) {
+    static columnsByLayout(layout) {
         const layouts = {
             'qwerty': [
                 'QWERTYUIOP'.split(''),
                 'ASDFGHJKL;'.split(''),
                 'ZXCVBNM,./'.split('')
-            ]        ,
+            ],
             'colemak': [
                 'QWFPGJLUY;'.split(''),
                 'ARSTDHNEIO'.split(''),

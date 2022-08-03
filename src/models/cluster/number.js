@@ -1,11 +1,15 @@
 import ClusterModel from './cluster.js'
+import ColumnModel from '../column.js'
+import KeyModel from '../key.js'
 
 class NumberClusterModel extends ClusterModel {
     constructor(x, y) {
-        super(x, y, 10, 1)
-        const keys = '1234567890'.split('').map(n => [n])
-        for(let i = 0; i < this.width; i++) {
-            this.keys[i][0] = keys[i][0]
+        super(x, y)
+        const keys = '1234567890'.split('')
+        for (let i = 0; i < keys.length; i++) {
+            const key = new KeyModel(keys[i])
+            const column = new ColumnModel([key])
+            this.add(column)
         }
     }
 }

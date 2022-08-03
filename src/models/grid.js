@@ -11,8 +11,8 @@ class GridModel {
   }
 
   plain() {
-    const { minWidth, minHeight, clusters, width, height, hasCollision, collisions } = this
-    return { minWidth, minHeight, clusters: clusters.map(c => c.plain()), width, height, hasCollision, collisions }
+    const { minWidth, minHeight, cells, clusters, width, height, hasCollision, collisions } = this
+    return { minWidth, minHeight, cells, clusters: clusters.map(c => c.plain()), width, height, hasCollision, collisions }
   }
 
   get width() {
@@ -41,17 +41,15 @@ class GridModel {
     this.clusters.forEach(cluster => {
       for (let x = 0; x < cluster.width; x++) {
         for (let y = 0; y < cluster.height; y++) {
-          const key = cluster.keys[x][y]
-          if (key) {
-            const cell = this.cells[cluster.x + x][cluster.y + y]
-            cell.push(key)
-            // Update collisions
-            const collision = this._collisions[[x, y]]
-            if (collision === undefined) {
-              this._collisions[[x, y]] = [cluster]
-            } else {
-              this._collisions[[x, y]].push(cluster)
-            }
+          const key = cluster.columns[x].keys[y]
+          const cell = this.cells[cluster.x + x][cluster.y + y]
+          cell.push(key)
+          // Update collisions
+          const collision = this._collisions[[x, y]]
+          if (collision === undefined) {
+            this._collisions[[x, y]] = [cluster]
+          } else {
+            this._collisions[[x, y]].push(cluster)
           }
         }
       }
