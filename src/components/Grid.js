@@ -11,9 +11,10 @@ import {
     VStack,
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
-import { addCluster } from '../store';
+import { useStore, addCluster } from '../store';
 
 function Grid(props) {
+    const gridSize = useStore(state => state.gridSize)
     return (
         <VStack
             margin={4}
@@ -21,8 +22,8 @@ function Grid(props) {
             <Menu>
                 <MenuButton
                     as={Button}
-                    h='48px'
-                    w='48px'
+                    h={gridSize}
+                    w={gridSize}
                     colorScheme='purple'
                     alignSelf='end'
                 >

@@ -5,13 +5,14 @@ import Grid from './Grid';
 import { Box, HStack, Heading } from '@chakra-ui/react';
 
 export default function App() {
-    const gridSize = 48
     const grid = useStore(state => state.grid)
+    const showBG = useStore(state => state.showBG)
+    const gridSize = useStore(state => state.gridSize)
     return (
         <Box
             minH='100vh'
-            bgSize={`${gridSize}px ${gridSize}px`}
-            bgImage='radial-gradient(circle, #999999 1px, rgba(0, 0, 0, 0) 1px)'
+            bgSize={showBG ? `${gridSize}px ${gridSize}px` : 'inherited'}
+            bgImage={showBG ? 'radial-gradient(circle, #999999 1px, rgba(0, 0, 0, 0) 1px)' : 'inherited'}
         >
             <HStack
                 w='100%'

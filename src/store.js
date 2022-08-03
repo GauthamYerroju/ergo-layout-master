@@ -7,6 +7,8 @@ const model = new GridModel(10, 3)
 export const useStore = create(set => ({
     model,
     grid: model.plain(),
+    gridSize: 14,
+    showBG: false,
 }))
 
 export default useStore

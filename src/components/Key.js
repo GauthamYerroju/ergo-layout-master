@@ -1,16 +1,21 @@
 import React from 'react';
-import { Square } from '@chakra-ui/react';
+import { Square, Box } from '@chakra-ui/react';
+import { useStore } from '../store';
 
 export default function Key(props) {
+    const gridSize = useStore(state => state.gridSize)
     return (
-        <Square
-            backgroundColor="#efefef"
-            dropShadow=""
-            borderRadius={4}
-            size={14}
+        <Box
+            w={gridSize}
+            h={gridSize}
             margin={1}
         >
-            <label>{props.model.label}</label>
-        </Square>
+            <Square
+                width='100%'
+                height='100%'
+                backgroundColor="#efefef"
+                borderRadius={4}
+            >{props.model.label}</Square>
+        </Box>
     );
 }
