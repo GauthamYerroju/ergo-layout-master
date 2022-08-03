@@ -6,13 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const renderApp = () => root.render(
   <React.StrictMode>
     <ChakraProvider>
       <App />
     </ChakraProvider>
   </React.StrictMode>
 );
+
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+  module.hot.accept('./components/App', renderApp)
+}
+
+renderApp();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
